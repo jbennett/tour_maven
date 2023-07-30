@@ -1,9 +1,14 @@
 <h1>Tours</h1>
+<div class="flex justify-between gap-x-4">
+  <h1 class="text-3xl font-bold tracking-wide mb-4">Tours</h1>
 
-<%= link_to "Add Tour", new_tour_path %>
+  <div>
+  <%= link_to new_tour_path, class: "inline-flex items-center gap-x-2 rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="-ml-0.5 h-5 w-5">
+      <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+    </svg>
 
-<ul>
-  <% @tours.each do |tour| %>
-    <li><%= link_to tour.label, [:edit, tour] %></li>
+    Add Tour
   <% end %>
-</ul>
+  </div>
+</div>
