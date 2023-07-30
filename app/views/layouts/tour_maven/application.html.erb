@@ -6,10 +6,13 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "tour_maven/application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "tour_maven/application", "data-turbo-track": "reload" %>
 </head>
 <body>
 
 <%= yield %>
+
+<div data-controller="hello"></div>
 
 </body>
 </html>
