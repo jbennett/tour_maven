@@ -2,10 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 import Tourguide from "tourguidejs"
 
 export default class extends Controller {
+    static values = {
+        id: Number,
+        selector: String,
+    }
+
+    connect() {
+        if (!this.passesContentSelector()) {
+            this.element.remove()
+        }
+    }
 
     disconnect() {
         // kill tour
     }
+
     startTour() {
         const defaultConfig = {
             steps: [],
@@ -44,5 +55,11 @@ export default class extends Controller {
                 window.location = action.href
             })
         ]
+    }
+
+    // private
+
+    passesContentSelector() {
+        return !this.hasSelectorValue || document.querySelector(this.selectorValue) != null
     }
 }

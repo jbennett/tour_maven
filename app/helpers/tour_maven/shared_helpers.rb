@@ -19,7 +19,11 @@ module TourMaven
     def tour_controller(id, user: nil, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       tour = TourMaven::Tour.find(id)
 
-      tag.template tour.configuration, data: { controller: 'tour', tour_id_value: id }, class: tour_class
+      tag.template tour.configuration, class: tour_class, data: {
+        controller: 'tour',
+        tour_id_value: id,
+        tour_selector_value: tour.content_selector.presence
+      }
     end
   end
 end
