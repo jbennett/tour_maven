@@ -1,1 +1,1 @@
-//= link tour_maven/application.css
+//= link_directory ../stylesheets/tour_maven .css
