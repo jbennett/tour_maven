@@ -1,0 +1,9 @@
+<h1>Tours</h1>
+
+<%= link_to "Add Tour", new_tour_path %>
+
+<ul>
+  <% @tours.each do |tour| %>
+    <li><%= link_to tour.label, [:edit, tour] %></li>
+  <% end %>
+</ul>

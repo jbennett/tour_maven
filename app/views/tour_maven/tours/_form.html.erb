@@ -1,0 +1,13 @@
+<%= form_with model: tour do |form| %>
+  <div class="">
+    <%= form.label :label %>
+    <%= form.text_field :label %>
+  </div>
+
+  <div class="">
+    <%= form.label :configuration %>
+    <%= form.text_area :configuration, rows: 10 %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
