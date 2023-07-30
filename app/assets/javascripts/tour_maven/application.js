@@ -1,3 +1,1 @@
-import "app/javascript/controllers"
-
-alert("hi")
+console.log("hi from tour maven assets")
