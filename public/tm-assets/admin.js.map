@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../app/javascript/admin.js"],
+  "sourcesContent": ["alert(\"admin\")"],
+  "mappings": "MAAA,MAAM,OAAO",
+  "names": []
+}

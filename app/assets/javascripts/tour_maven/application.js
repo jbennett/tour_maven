@@ -1,3 +1,3 @@
-import "controllers"
+import "app/javascript/controllers"
 
 alert("hi")

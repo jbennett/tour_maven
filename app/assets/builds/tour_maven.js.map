@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../javascript/tour_maven.js"],
+  "sourcesContent": ["alert(\"asdf\")"],
+  "mappings": ";;AAAA,QAAM,MAAM;",
+  "names": []
+}
