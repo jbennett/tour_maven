@@ -1,23 +1,25 @@
 <%= form_with model: tour do |form| %>
-  <div class="">
-    <%= form.label :label %>
-    <%= form.text_field :label %>
-  </div>
+  <div class="space-y-4">
+    <div class="space-y-2">
+      <%= form.label :label, class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.text_field :label, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
 
-  <div class="">
-    <%= form.label :configuration %>
-    <%= form.text_area :configuration, rows: 10 %>
-  </div>
+    <div class="space-y-2">
+      <%= form.label :configuration, class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.text_area :configuration, rows: 10, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
 
-  <div class="">
-    <%= form.label :page_filter %>
-    <%= form.text_field :page_filter %>
-  </div>
+    <div class="space-y-2">
+      <%= form.label :page_filter, class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.text_field :page_filter, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
 
-  <div class="">
-    <%= form.label :content_selector %>
-    <%= form.text_field :content_selector %>
-  </div>
+    <div class="space-y-2">
+      <%= form.label :content_selector, class: "block text-sm font-medium leading-6 text-gray-900"  %>
+      <%= form.text_field :content_selector, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
 
-  <%= form.submit %>
+    <%= form.submit nil, class: "inline-flex items-center gap-x-2 rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer" %>
+  </div>
 <% end %>
