@@ -1,10 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
+import { post } from '@rails/request.js'
 import Tourguide from "tourguidejs"
 
 export default class extends Controller {
     static values = {
-        id: Number,
+        tourId: Number,
         selector: String,
+        userSgid: String,
     }
 
     connect() {
@@ -20,8 +22,10 @@ export default class extends Controller {
     startTour() {
         const defaultConfig = {
             steps: [],
-            onComplete: this.onComplete.bind(this),
+            onStart: this.onStart.bind(this),
+            onStep: this.onStep.bind(this),
             onStop: this.onStop.bind(this),
+            onComplete: this.onComplete.bind(this),
             actionHandlers: this.actionHandlers(),
         }
         const userConfig = JSON.parse(this.element.innerHTML)
@@ -34,15 +38,20 @@ export default class extends Controller {
         this.tour.start()
     }
 
-    onComplete(e) {
-        console.log("compelte", e)
+    onStart(e) {
+        this.sendBeacon("start")
+    }
+
+    onStep(step) {
+        this.sendBeacon("step", `${step.index}: ${step.title}`)
     }
 
     onStop(e) {
-        // Cookies.remove('tourguide_continue')
-        // Cookies.remove('tourguide_next_step')
+        this.sendBeacon("stop")
+    }
 
-        console.log("stop", e)
+    onComplete(e) {
+        this.sendBeacon("complete")
     }
 
     actionHandlers() {
@@ -61,5 +70,27 @@ export default class extends Controller {
 
     passesContentSelector() {
         return !this.hasSelectorValue || document.querySelector(this.selectorValue) != null
+    }
+
+    async sendBeacon(action, identifier) {
+        console.log("sending tracking beacon", action, identifier)
+        const path = "/foo/events"
+        const payload = JSON.stringify({
+            event: {
+                tour_id: this.tourIdValue,
+                action: action,
+                identifier: identifier,
+                user_sgid: this.userSgidValue,
+            }
+        })
+
+        const response = await post(path, {
+            body: payload
+        })
+
+        if (!response.ok) {
+            console.error("failed")
+            debugger
+        }
     }
 }

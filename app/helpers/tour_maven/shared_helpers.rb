@@ -2,7 +2,7 @@ module TourMaven
   module SharedHelpers
     DEFAULT_TOUR_OUTLET_CLASS = "tour_outlet"
 
-    def available_tour_controllers(tour_class: DEFAULT_TOUR_OUTLET_CLASS)
+    def available_tour_controllers(user: nil, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       path = request.path
       tours = TourMaven::Tour.in_path(path)
 
@@ -23,9 +23,11 @@ module TourMaven
 
       tag.template tour.configuration, class: tour_class, data: {
         controller: 'tour',
-        tour_id_value: id,
-        tour_selector_value: tour.content_selector.presence
+        tour_tour_id_value: id,
+        tour_selector_value: tour.content_selector.presence,
+        tour_user_sgid_value: user.to_sgid.to_s,
       }
     end
+
   end
 end
