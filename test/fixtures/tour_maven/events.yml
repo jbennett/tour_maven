@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  user_type: User
+  tour: one
+  action: MyString
+  identifier: MyString
+
+two:
+  user: two
+  user_type: User
+  tour: two
+  action: MyString
+  identifier: MyString
