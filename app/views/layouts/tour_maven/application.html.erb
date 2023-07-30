@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tour maven</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>Tour maven</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag "tour_maven/application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "tour_maven/application", "data-turbo-track": "reload" %>
-</head>
-<body>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- TODO: hackathon hack -->
+    <%= stylesheet_link_tag "tour_maven/application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "tour_maven/application", "data-turbo-track": "reload" %>
+  </head>
 
-<%= yield %>
-
-<div data-controller="hello"></div>
-
-</body>
+  <body class="min-h-screen bg-gray-900 flex flex-col">
+    <div class=""><%= render "navigation" %></div>
+    <div class="bg-red-400"><%= yield %></div>
+  </body>
 </html>

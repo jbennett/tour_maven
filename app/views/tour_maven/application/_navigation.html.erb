@@ -1,0 +1,41 @@
+<div class="flex grow flex-col gap-y-5 overflow-y-auto pr-6 min-h-full">
+  <div class="mx-6 flex h-16 shrink-0 items-center">
+    <div class="text-xl font-bold text-white">TourMaven</div>
+  </div>
+  <nav class="flex flex-1 flex-col">
+    <ul role="list" class="flex flex-1 flex-col gap-y-7">
+      <li>
+        <ul role="list" class="space-y-1">
+          <li>
+            <%= link_to "#", class: 'border-l-2 pl-4 border-transparent hover:border-white text-gray-200 hover:text-white group flex gap-x-3 p-2 text-sm leading-6 font-semibold' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+
+              Dashboard
+            <% end %>
+
+            <%= link_to tours_path, class: 'border-l-2 pl-4 border-transparent hover:border-white text-gray-200 hover:text-white group flex gap-x-3 p-2 text-sm leading-6 font-semibold' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+              </svg>
+
+              Tours
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <ul role="list" class="space-y-1">
+          <%= link_to "/", class: 'border-l-2 pl-4 border-transparent hover:border-white text-gray-200 hover:text-white group flex gap-x-3 p-2 text-sm leading-6 font-semibold' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            Exit
+          <% end  %>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
