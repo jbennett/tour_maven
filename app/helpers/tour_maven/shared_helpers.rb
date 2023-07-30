@@ -6,8 +6,10 @@ module TourMaven
       path = request.path
       tours = TourMaven::Tour.in_path(path)
 
-      tours.each do |tour|
-        concat tour_controller(tour.id, tour_class: tour_class)
+      capture do
+        tours.each do |tour|
+          concat tour_controller(tour.id, user: user, tour_class: tour_class)
+        end
       end
     end
 
