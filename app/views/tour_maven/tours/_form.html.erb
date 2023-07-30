@@ -9,5 +9,15 @@
     <%= form.text_area :configuration, rows: 10 %>
   </div>
 
+  <div class="">
+    <%= form.label :page_filter %>
+    <%= form.text_field :page_filter %>
+  </div>
+
+  <div class="">
+    <%= form.label :content_selector %>
+    <%= form.text_field :content_selector %>
+  </div>
+
   <%= form.submit %>
 <% end %>
