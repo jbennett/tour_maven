@@ -10,8 +10,8 @@
     <%= javascript_include_tag "tour_maven/application", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="min-h-screen bg-gray-900 flex flex-col">
-    <div class=""><%= render "navigation" %></div>
-    <div class="bg-red-400"><%= yield %></div>
+  <body class="min-h-screen bg-gray-900 flex flex-col lg:flex-row">
+    <div class="w-full lg:max-w-xs"><%= render "navigation" %></div>
+    <div class="flex-grow bg-white rounded-tl ml-2 px-4 py-3 lg:my-2 lg:rounded-l"><%= yield %></div>
   </body>
 </html>
