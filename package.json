@@ -9,15 +9,15 @@
     "build": "yarn build:js",
     "xbuild": "yarn build:js && yarn build:css",
     "build:js": "esbuild app/javascript/*.js --bundle --sourcemap --outdir=app/assets/builds",
-    "prod:build": "yarn prod:build:js",
-    "xprod:build": "yarn prod:build:js && yarn prod:build:css",
+    "prod:build": "yarn prod:build:js && yarn prod:build:css",
     "prod:build:js": "esbuild app/javascript/*.js --bundle --sourcemap --minify --outdir=public/tm-assets",
-    "prod:build:css": "tailwindcss -i ./app/assets/stylesheets/avo.base.css -o ./public/tm-assets/avo.base.css --postcss"
+    "prod:build:css": "tailwindcss -i ./app/assets/stylesheets/tour_maven/tour_maven.css -o ./public/tm-assets/tour_maven.css"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
     "@rails/request.js": "^0.0.8",
+    "@sjmc11/tourguidejs": "^0.0.10",
     "esbuild": "^0.18.17",
-    "tourguidejs": "^1.1.2"
+    "tailwindcss": "^3.3.3"
   }
 }

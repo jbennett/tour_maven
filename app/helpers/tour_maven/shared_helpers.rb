@@ -28,8 +28,8 @@ module TourMaven
         controller: 'tour',
         tour_tour_id_value: id,
         tour_selector_value: tour.content_selector.presence,
-        tour_user_sgid_value: user&.to_sgid.presence,
-        tour_event_path: TourMaven::Engine.routes.url_helpers.events_path,
+        tour_user_sgid_value: user&.to_sgid.to_s,
+        tour_event_path_value: TourMaven::Engine.routes.url_helpers.events_path,
       }
     end
 

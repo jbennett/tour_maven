@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { post } from '@rails/request.js'
-import Tourguide from "tourguidejs"
+import { TourGuideClient } from "@sjmc11/tourguidejs/src/Tour"
 
 export default class extends Controller {
     static values = {
@@ -23,49 +23,40 @@ export default class extends Controller {
     startTour() {
         const defaultConfig = {
             steps: [],
-            onStart: this.onStart.bind(this),
-            onStep: this.onStep.bind(this),
-            onStop: this.onStop.bind(this),
-            onComplete: this.onComplete.bind(this),
-            actionHandlers: this.actionHandlers(),
+            rememberStep: true,
+            // actionHandlers: this.actionHandlers(),
         }
         const userConfig = JSON.parse(this.element.innerHTML)
         const config = { ...defaultConfig, ...userConfig }
         console.log(config)
 
-        this.tour = new Tourguide(config)
+        this.tour = new TourGuideClient(config)
+        this.tour.onAfterStepChange(() => {
+            this.sendBeacon("step", `${this.tour.activeStep}: ${this.tour.tourSteps[this.tour.activeStep].title}`)
+        })
+        this.tour.onBeforeExit(() => {
+            this.sendBeacon("quit")
+        })
+        this.tour.onFinish(() => {
+            this.sendBeacon("complete")
+        })
 
         console.log("starting tour", config)
         this.tour.start()
-    }
-
-    onStart(e) {
         this.sendBeacon("start")
     }
 
-    onStep(step) {
-        this.sendBeacon("step", `${step.index}: ${step.title}`)
-    }
-
-    onStop(e) {
-        this.sendBeacon("stop")
-    }
-
-    onComplete(e) {
-        this.sendBeacon("complete")
-    }
-
-    actionHandlers() {
-        return [
-            new Tourguide.ActionHandler('continueTour', (event, action, context) => {
-                event.preventDefault()
-                // Cookies.set('tourguide_continue', 'x')
-                // Cookies.set('tourguide_next_step', context.currentstep.index + 1)
-
-                window.location = action.href
-            })
-        ]
-    }
+    // actionHandlers() {
+    //     return [
+    //         new Tourguide.ActionHandler('continueTour', (event, action, context) => {
+    //             event.preventDefault()
+    //             // Cookies.set('tourguide_continue', 'x')
+    //             // Cookies.set('tourguide_next_step', context.currentstep.index + 1)
+    //
+    //             window.location = action.href
+    //         })
+    //     ]
+    // }
 
     // private
 
