@@ -7,6 +7,7 @@ export default class extends Controller {
         tourId: Number,
         selector: String,
         userSgid: String,
+        eventPath: String,
     }
 
     connect() {
@@ -74,7 +75,6 @@ export default class extends Controller {
 
     async sendBeacon(action, identifier) {
         console.log("sending tracking beacon", action, identifier)
-        const path = "/foo/events"
         const payload = JSON.stringify({
             event: {
                 tour_id: this.tourIdValue,
@@ -84,7 +84,7 @@ export default class extends Controller {
             }
         })
 
-        const response = await post(path, {
+        const response = await post(this.eventPathValue, {
             body: payload
         })
 
