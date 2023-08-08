@@ -10,7 +10,7 @@ module TourMaven
     private
 
     def event_params
-      params.require(:event).permit(:tour_id, :action, :identifer, :user_sgid)
+      params.require(:event).permit(:tour_id, :action, :identifier, :user_sgid)
     end
   end
 end
