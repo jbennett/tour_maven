@@ -21,7 +21,7 @@ export default class extends Controller {
         // kill tour
     }
 
-    startTour() {
+    setupTour() {
         const defaultConfig = {
             steps: [],
         }
@@ -32,6 +32,14 @@ export default class extends Controller {
         this.tour.onAfterStepChange(this.onStep.bind(this))
         this.tour.onBeforeExit(this.onQuit.bind(this))
         this.tour.onFinish(this.onComplete.bind(this))
+    }
+
+    startTour() {
+        if (!this.tour) {
+            this.setupTour()
+        } else {
+            this.tour.visitStep(0)
+        }
 
         this.tour.start()
         this.sendBeacon("start")
