@@ -14,6 +14,20 @@ module TourMaven
       end
     end
 
+    def tour_button(tour, user: nil, classes: nil)
+      classes ||= "bg-red-400 "
+
+      tag.div class: classes, data: {
+        controller: 'tour',
+        tour_tour_id_value: tour.id,
+        tour_user_sgid_value: user&.to_sgid.to_s,
+        tour_event_path_value: TourMaven::Engine.routes.url_helpers.events_path,
+      } do
+        concat tag.button("Asdfsa", class: classes, "data-action": "tour#startTour")
+        concat tag.template(tour.configuration, "data-tour-target": "configuration")
+      end
+    end
+
     def tours_controller(tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       tour_selector = ".#{tour_class}" # the outlet uses a selector not the class directly
       tag.template nil, data: {

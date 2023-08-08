@@ -3,6 +3,7 @@ import { post } from '@rails/request.js'
 import { TourGuideClient } from "@sjmc11/tourguidejs/src/Tour"
 
 export default class extends Controller {
+    static targets = ["configuration"]
     static values = {
         tourId: Number,
         selector: String,
@@ -23,48 +24,47 @@ export default class extends Controller {
     startTour() {
         const defaultConfig = {
             steps: [],
-            rememberStep: true,
-            // actionHandlers: this.actionHandlers(),
         }
-        const userConfig = JSON.parse(this.element.innerHTML)
+        const userConfig = JSON.parse(this.tourConfig)
         const config = { ...defaultConfig, ...userConfig }
-        console.log(config)
 
         this.tour = new TourGuideClient(config)
-        this.tour.onAfterStepChange(() => {
-            this.sendBeacon("step", `${this.tour.activeStep}: ${this.tour.tourSteps[this.tour.activeStep].title}`)
-        })
-        this.tour.onBeforeExit(() => {
-            this.sendBeacon("quit")
-        })
-        this.tour.onFinish(() => {
-            this.sendBeacon("complete")
-        })
+        this.tour.onAfterStepChange(this.onStep.bind(this))
+        this.tour.onBeforeExit(this.onQuit.bind(this))
+        this.tour.onFinish(this.onComplete.bind(this))
 
-        console.log("starting tour", config)
         this.tour.start()
         this.sendBeacon("start")
     }
 
-    // actionHandlers() {
-    //     return [
-    //         new Tourguide.ActionHandler('continueTour', (event, action, context) => {
-    //             event.preventDefault()
-    //             // Cookies.set('tourguide_continue', 'x')
-    //             // Cookies.set('tourguide_next_step', context.currentstep.index + 1)
-    //
-    //             window.location = action.href
-    //         })
-    //     ]
-    // }
-
     // private
+
+    onStep() {
+        const identifier = `${this.tour.activeStep}: ${this.tour.tourSteps[this.tour.activeStep].title}`
+        this.sendBeacon("step", identifier)
+    }
+
+    onQuit() {
+        if (this.tour.activeStep === this.tour.tourSteps.length - 1) return // don't track quits for complete tours
+
+        this.sendBeacon("quit")
+    }
+
+    onComplete() {
+        this.sendBeacon("complete")
+    }
+
 
     passesContentSelector() {
         return !this.hasSelectorValue || document.querySelector(this.selectorValue) != null
     }
 
     async sendBeacon(action, identifier) {
+        if (!this.hasUserSgidValue) {
+            console.log("no user")
+            return
+        }
+
         console.log("sending tracking beacon", action, identifier)
         const payload = JSON.stringify({
             event: {
@@ -82,6 +82,14 @@ export default class extends Controller {
         if (!response.ok) {
             console.error("failed")
             debugger
+        }
+    }
+
+    get tourConfig() {
+        if (this.hasConfigurationTarget) {
+            return this.configurationTarget.innerHTML
+        } else {
+            return this.element.innerHTML
         }
     }
 }
