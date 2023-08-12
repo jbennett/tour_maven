@@ -4,6 +4,11 @@ module TourMaven
 
     enum auto_start: { once: "once", always: "always" }
 
+    scope :available_at, ->(at) do
+      where(publish_at: [...at])
+        .where("tour_maven_tours.expire_at IS NULL OR tour_maven_tours.expire_at >= ?", at)
+    end
+
     scope :available_for_user, ->(user) do
       left_joins(:events)
         .where("tour_maven_tours.auto_start = 'always'")

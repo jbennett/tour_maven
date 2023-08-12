@@ -2,10 +2,11 @@ module TourMaven
   module SharedHelpers
     DEFAULT_TOUR_OUTLET_CLASS = "tour_outlet"
 
-    def available_tour_controllers(user: nil, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
+    def available_tour_controllers(user: nil, available_at: Time.now, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       path = request.path
       tours = TourMaven::Tour.in_path(path)
       tours = tours.available_for_user(user) if user
+      tours = tours.available_at(available_at) if available_at
 
       capture do
         tours.each do |tour|

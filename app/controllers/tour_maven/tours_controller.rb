@@ -29,7 +29,7 @@ module TourMaven
     private
 
     def tour_params
-      params.require(:tour).permit(:label, :configuration, :auto_start, :page_filter, :content_selector)
+      params.require(:tour).permit(:label, :configuration, :publish_at, :expire_at, :auto_start, :page_filter, :content_selector)
     end
   end
 end

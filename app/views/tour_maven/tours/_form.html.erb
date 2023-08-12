@@ -11,6 +11,16 @@
     </div>
 
     <div class="space-y-2">
+      <%= form.label :publish_at, class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.datetime_field :publish_at, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
+
+    <div class="space-y-2">
+      <%= form.label :expire_at, class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= form.datetime_field :expire_at, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+    </div>
+
+    <div class="space-y-2">
       <%= form.label :auto_start, class: "block text-sm font-medium leading-6 text-gray-900" %>
       <%= form.select :auto_start, options_for_enum(TourMaven::Tour.auto_starts, tour.auto_start), {}, class: "block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
     </div>
