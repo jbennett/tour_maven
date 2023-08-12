@@ -5,9 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <script src="https://cdn.tailwindcss.com"></script> <!-- TODO: hackathon hack -->
-    <%= stylesheet_link_tag "tour_maven/application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "tour_maven/application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "/tour_maven/admin.js", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "/tour_maven/admin.css", "data-turbo-track": "reload" %>
   </head>
 
   <body class="min-h-screen bg-gray-900 flex flex-col lg:flex-row">

@@ -6,12 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "yarn build:js",
-    "xbuild": "yarn build:js && yarn build:css",
-    "build:js": "esbuild app/javascript/*.js --bundle --sourcemap --outdir=app/assets/builds",
-    "prod:build": "yarn prod:build:js && yarn prod:build:css",
-    "prod:build:js": "esbuild app/javascript/*.js --bundle --sourcemap --minify --outdir=public/tm-assets",
-    "prod:build:css": "tailwindcss -i ./app/assets/stylesheets/tour_maven/tour_maven.css -o ./public/tm-assets/tour_maven.css"
+    "build": "yarn build:js && yarn build:css",
+    "build:js": "esbuild app/javascript/*.js --bundle --sourcemap --minify --outdir=public/tour_maven",
+    "build:css": "yarn build:css:application && yarn build:css:admin",
+    "build:css:application": "tailwindcss -i ./app/assets/stylesheets/tour_maven/application.css -o ./public/tour_maven/application.css --minify",
+    "build:css:admin": "tailwindcss -i ./app/assets/stylesheets/tour_maven/admin.css -o ./public/tour_maven/admin.css --minify"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
