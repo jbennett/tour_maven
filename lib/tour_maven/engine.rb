@@ -8,8 +8,6 @@ module TourMaven
       root: TourMaven::Engine.root.join("public")
     )
 
-    config.assets.paths << File.expand_path("../../../node_modules", __FILE__)
-
     initializer 'tour_maven.action_controller' do |app|
       ActiveSupport.on_load :action_controller do
         helper TourMaven::SharedHelpers
