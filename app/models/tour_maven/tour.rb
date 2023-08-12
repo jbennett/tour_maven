@@ -4,16 +4,16 @@ module TourMaven
 
     enum auto_start: { once: "once", always: "always" }
 
-    scope :in_path, ->(path) {
-      where("page_filter IS NULL OR page_filter = ?", path)
-    }
-
-    def self.available_for_user(user)
+    scope :available_for_user, ->(user) do
       left_joins(:events)
         .where("tour_maven_tours.auto_start = 'always'")
         .or(TourMaven::Tour.where("tour_maven_tours.auto_start = 'once' AND NOT EXISTS (:start_events)",
                   start_events: TourMaven::Event.select("1").where("tour_maven_tours.id = tour_maven_events.tour_id").where(user: user, action: "start")
         ))
+    end
+
+    scope :in_path, ->(path) do
+      where("page_filter IS NULL OR page_filter = ?", path)
     end
 
     def page_filter=(value)
