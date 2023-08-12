@@ -8,11 +8,11 @@ Add the gem, mount the engine, install the migrations, and add a 3 lines to your
 
 1. Add to your Gemfile: `gem "tour_maven", git: 'https://github.com/jbennett/tour_maven.git', branch: 'main'`
 2. Copy over the migrations: `rails tour_maven:install:migrations`
-3. Mount the engine in your routes.rb: `mount TourMaven::Engine, at: "/tour_maven"`
+3. Mount the engine in your routes.rb: `mount TourMaven::Engine => "/tour_maven"`
 4. Add the javascript includes to your layout <head>:
    ```
-   <%= javascript_include_tag "/tour_maven/application.js", "data-turbo-track": "reload" %>
-   <%= stylesheet_link_tag "/tour_maven/application.css", "data-turbo-track": "reload" %>
+   <%= javascript_include_tag "/tm-assets/application.js", "data-turbo-track": "reload" %>
+   <%= stylesheet_link_tag "/tm-assets/application.css", "data-turbo-track": "reload" %>
    ```
 5. Add the helpers to the bottom of your layout:
    ```

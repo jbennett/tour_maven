@@ -4,7 +4,7 @@ module TourMaven
 
     config.app_middleware.use(
       Rack::Static,
-      urls: ["/tour_maven"],
+      urls: ["/tm-assets"],
       root: TourMaven::Engine.root.join("public")
     )
 
