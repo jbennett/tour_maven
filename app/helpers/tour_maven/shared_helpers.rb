@@ -23,7 +23,7 @@ module TourMaven
         tour_event_path_value: TourMaven::Engine.routes.url_helpers.events_path,
       } do
         concat tag.button(label, "data-action": "tour#startTour", **btn_options)
-        concat tag.template(tour.configuration, "data-tour-target": "configuration")
+        concat tag.template(tour.configuration.to_json, "data-tour-target": "configuration")
       end
     end
 
@@ -38,7 +38,7 @@ module TourMaven
     def tour_controller(id, user: nil, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       tour = TourMaven::Tour.find(id)
 
-      tag.template tour.configuration, class: tour_class, data: {
+      tag.template tour.configuration.to_json, class: tour_class, data: {
         controller: 'tour',
         tour_tour_id_value: id,
         tour_selector_value: tour.content_selector.presence,
