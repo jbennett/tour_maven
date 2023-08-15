@@ -29,7 +29,8 @@ export default class extends Controller {
         const config = { ...defaultConfig, ...userConfig }
 
         this.tour = new TourGuideClient(config)
-        this.tour.onAfterStepChange(this.onStep.bind(this))
+        this.tour.onBeforeStepChange(this.beforeStep.bind(this))
+        this.tour.onAfterStepChange(this.afterStep.bind(this))
         this.tour.onBeforeExit(this.onQuit.bind(this))
         this.tour.onFinish(this.onComplete.bind(this))
     }
@@ -47,9 +48,15 @@ export default class extends Controller {
 
     // private
 
-    onStep() {
-        const identifier = `${this.tour.activeStep}: ${this.tour.tourSteps[this.tour.activeStep].title}`
+    beforeStep() {
+        this.tryClick(this.currentStep.beforeClick)
+    }
+
+    afterStep() {
+        const currentStep = this.currentStep
+        const identifier = `${this.tour.activeStep}: ${currentStep.title}`
         this.sendBeacon("step", identifier)
+        this.tryClick(this.currentStep.afterClick)
     }
 
     onQuit() {
@@ -99,5 +106,19 @@ export default class extends Controller {
         } else {
             return this.element.innerHTML
         }
+    }
+
+    get currentStep() {
+        return this.tour.tourSteps[this.tour.activeStep]
+    }
+
+    tryClick(selector, bubbles = false) {
+        const node = document.querySelector(selector)
+        if (!node) return
+
+        let event = new Event("click", {
+            bubbles: bubbles
+        })
+        node.dispatchEvent(event)
     }
 }
