@@ -28,5 +28,9 @@ module TourMaven
     def content_selector=(value)
       super(value.presence)
     end
+
+    def configuration=(value)
+      super(JSON.parse(value))
+    end
   end
 end
