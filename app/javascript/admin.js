@@ -5,9 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
         let node = document.createElement("div")
         field.after(node)
         field.classList.add("hidden")
-        let content = {
-            text: field.value
+        let content = {}
+
+        try {
+            content.json = JSON.parse(field.value)
+        } catch(e) {
+            content.text = field.value
         }
+
         const editor = new JSONEditor({
             target: node,
             props: {
