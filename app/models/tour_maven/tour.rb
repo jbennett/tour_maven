@@ -10,12 +10,11 @@ module TourMaven
     end
 
     scope :available_for_user, ->(user) do
-      left_joins(:events)
-        .where("tour_maven_tours.auto_start = 'always'")
-        .or(TourMaven::Tour.where("tour_maven_tours.auto_start = 'once' AND NOT EXISTS (:start_events)",
-                  start_events: TourMaven::Event.select("1").where("tour_maven_tours.id = tour_maven_events.tour_id").where(user: user, action: "start")
-        ))
+      merge(start_always.or(start_once(user)))
     end
+
+    scope :start_always, -> { where(auto_start: :always) }
+    scope :start_once, ->(user) { where("(tour_maven_tours.auto_start = 'once' AND NOT EXISTS (:start_events))", start_events: TourMaven::Event.select("1").where("tour_maven_tours.id = tour_maven_events.tour_id").where(user: user, action: "start")) }
 
     scope :in_path, ->(path) do
       where("page_filter IS NULL OR page_filter = ?", path)
