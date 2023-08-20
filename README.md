@@ -10,14 +10,22 @@ Add the gem, mount the engine, install the migrations, and add a 3 lines to your
 2. Copy over the migrations: `rails tour_maven:install:migrations`
 3. Mount the engine in your routes.rb: `mount TourMaven::Engine => "/tour_maven"`
 4. Add the javascript includes to your layout <head>:
-   ```
+   ```erb
    <%= javascript_include_tag "/tm-assets/application.js", "data-turbo-track": "reload" %>
    <%= stylesheet_link_tag "/tm-assets/application.css", "data-turbo-track": "reload" %>
    ```
 5. Add the helpers to the bottom of your layout:
-   ```
+   ```erb
    <%= available_tour_controllers(user: current_user) %>
    <%= tours_controller %>
+   ```
+6. Add an initializer to authorize the user:
+   ```ruby
+   TourMaven.configure do |config|
+     config.admin_user? do
+       current_user&.admin?
+     end
+   end
    ```
 
 With this setup you can create tours at `/tour_maven/tours`. See the documentation for [Tourguide.js steps](https://tourguidejs.com/docs/steps.html#steps-array) for details on creating your own tours.   
