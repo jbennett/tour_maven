@@ -10,7 +10,7 @@ module TourMaven
 
     initializer 'tour_maven.action_controller' do |app|
       ActiveSupport.on_load :action_controller do
-        helper TourMaven::SharedHelpers
+        # helper TourMaven::SharedHelpers
       end
     end
   end
