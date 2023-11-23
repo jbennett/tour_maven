@@ -2,6 +2,11 @@ module TourMaven
   module SharedHelpers
     DEFAULT_TOUR_OUTLET_CLASS = "tour_outlet"
 
+    def tour_maven_assets
+      javascript_include_tag("/tm-assets/application.js", "data-turbo-track": "reload") +
+        stylesheet_link_tag("/tm-assets/application.css", "data-turbo-track": "reload")
+    end
+
     def available_tour_controllers(user: nil, available_at: Time.now, tour_class: DEFAULT_TOUR_OUTLET_CLASS)
       path = request.path
       tours = TourMaven::Tour.in_path(path)
