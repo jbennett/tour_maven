@@ -2,7 +2,7 @@ module TourMaven
   class Tour < ApplicationRecord
     has_many :events
 
-    enum auto_start: { once: "once", always: "always" }
+    enum :auto_start, %w[once always].index_by(&:itself)
 
     scope :available_at, ->(at) do
       where(publish_at: [...at])
